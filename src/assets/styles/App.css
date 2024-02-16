@@ -17,4 +17,10 @@
 .started-button {
   color: #fffae6;
   background-color: black;
+  border: 1px solid transparent;
+}
+.started-button:hover {
+  color: black;
+  background-color: #fffae6;
+  border-color: black;
 }

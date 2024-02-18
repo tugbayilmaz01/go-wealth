@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import coinPhoto from "../../src/assets/images/coin.png";
+import { calculateEffort } from "../utils/calculateLabor";
 
 const CalculationCard = () => {
+  const [monthlyWorkingHours, setMonthlyWorkingHours] = useState("");
+  const [monthlyIncome, setMonthlyIncome] = useState("");
+  const [itemPrice, setItemPrice] = useState("");
+
+  const [effortResult, setEffortResult] = useState(null);
+
+  const handleCalculateEffort = () => {
+    const result = calculateEffort(
+      parseFloat(monthlyWorkingHours),
+      parseFloat(monthlyIncome),
+      parseFloat(itemPrice)
+    );
+    setEffortResult(result);
+  };
   return (
     <>
       <div className="h-screen background-color flex flex-col pt-10 items-center">
@@ -26,6 +41,8 @@ const CalculationCard = () => {
               type="number"
               id="monthlyHours"
               name="monthlyHours"
+              value={monthlyWorkingHours}
+              onChange={(e) => setMonthlyWorkingHours(e.target.value)}
               className="p-1 border border-black rounded-md mt-1 calculate-input"
             />
           </div>
@@ -40,7 +57,9 @@ const CalculationCard = () => {
             <input
               type="number"
               id="monthlyEarnings"
+              value={monthlyIncome}
               name="monthlyEarnings"
+              onChange={(e) => setMonthlyIncome(e.target.value)}
               className="p-1 border border-black rounded-md mt-1 calculate-input"
             />
           </div>
@@ -56,13 +75,29 @@ const CalculationCard = () => {
           <input
             type="number"
             id="expenditure"
+            value={itemPrice}
             name="expenditure"
+            onChange={(e) => setItemPrice(e.target.value)}
             className="p-1 border border-black rounded-md mt-1 calculate-input"
           />
         </div>
-        <button className="started-button p-4 mt-6 rounded-full w-1/4">
+        <button
+          onClick={handleCalculateEffort}
+          className="started-button p-4 mt-6 rounded-full w-1/4"
+        >
           Calculate
         </button>
+        {effortResult !== null && (
+          <p className="poppins pt-6 text-lg">
+            <>
+              You have spent{" "}
+              <span style={{ fontWeight: "bold", color: "green" }}>
+                {effortResult.toFixed(1)} hours
+              </span>{" "}
+              of effort in a month for this expense.
+            </>
+          </p>
+        )}
       </div>
     </>
   );

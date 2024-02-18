@@ -5,13 +5,12 @@
 .App {
   text-align: center;
 }
+body {
+  background-color: #fffae6;
+}
 
 .poppins {
   font-family: "Poppins", sans-serif;
-}
-
-.background-color {
-  background-color: #fffae6;
 }
 
 .started-button {
@@ -23,4 +22,14 @@
   color: black;
   background-color: #fffae6;
   border-color: black;
+}
+
+.register-button {
+  border: 1px solid transparent;
+  border-color: black;
+  background-color: #fffae6;
+}
+
+.calculate-input {
+  background-color: #fffae6;
 }

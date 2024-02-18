@@ -4,17 +4,17 @@ import coinPhoto from "../../src/assets/images/coin.png";
 const CalculationCard = () => {
   return (
     <>
-      <div className="h-screen background-color flex flex-col pt-20 items-center">
+      <div className="h-screen background-color flex flex-col pt-10 items-center">
         <img src={coinPhoto} alt="home-page-pic" className="h-1/5 pr-34" />
         <div className="poppins text-2xl pt-4">
           Calculate how long it has worked for the product you will purchase.
         </div>
-        <div className="poppins text-sm mt-4">
+        <div className="poppins text-sm mt-2">
           It's time to find out if what you're going to buy is really worth your
           effort!
         </div>
 
-        <div className="flex flex-row mt-6">
+        <div className="flex flex-row mt-10">
           <div className="flex flex-col mr-8">
             <label
               className="poppins text-sm font-semibold"
@@ -26,7 +26,7 @@ const CalculationCard = () => {
               type="number"
               id="monthlyHours"
               name="monthlyHours"
-              className="p-1 border border-black rounded-md mt-1 background-color"
+              className="p-1 border border-black rounded-md mt-1 calculate-input"
             />
           </div>
 
@@ -41,7 +41,7 @@ const CalculationCard = () => {
               type="number"
               id="monthlyEarnings"
               name="monthlyEarnings"
-              className="p-1 border border-black rounded-md mt-1 background-color"
+              className="p-1 border border-black rounded-md mt-1 calculate-input"
             />
           </div>
         </div>
@@ -57,10 +57,10 @@ const CalculationCard = () => {
             type="number"
             id="expenditure"
             name="expenditure"
-            className="p-1 border border-black rounded-md mt-1 background-color"
+            className="p-1 border border-black rounded-md mt-1 calculate-input"
           />
         </div>
-        <button className="started-button p-4 ml-16 mt-6 rounded-full w-1/4">
+        <button className="started-button p-4 mt-6 rounded-full w-1/4">
           Calculate
         </button>
       </div>

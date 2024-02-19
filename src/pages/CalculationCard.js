@@ -8,13 +8,20 @@ const CalculationCard = () => {
   const [itemPrice, setItemPrice] = useState("");
 
   const [effortResult, setEffortResult] = useState(null);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   const handleCalculateEffort = () => {
+    if (!monthlyWorkingHours || !monthlyIncome || !itemPrice) {
+      setShowErrorMessage(true);
+      setEffortResult(null);
+      return;
+    }
     const result = calculateEffort(
       parseFloat(monthlyWorkingHours),
       parseFloat(monthlyIncome),
       parseFloat(itemPrice)
     );
+    setShowErrorMessage(false);
     setEffortResult(result);
   };
   return (
@@ -87,15 +94,18 @@ const CalculationCard = () => {
         >
           Calculate
         </button>
-        {effortResult !== null && (
+        {showErrorMessage && (
+          <p className="poppins pt-6 text-lg" style={{ color: "red" }}>
+            Fill in all input fields to make calculation.
+          </p>
+        )}
+        {effortResult !== null && !showErrorMessage && (
           <p className="poppins pt-6 text-lg">
-            <>
-              You have spent{" "}
-              <span style={{ fontWeight: "bold", color: "green" }}>
-                {effortResult.toFixed(1)} hours
-              </span>{" "}
-              of effort in a month for this expense.
-            </>
+            You have spent{" "}
+            <span style={{ fontWeight: "bold", color: "green" }}>
+              {effortResult.toFixed(1)} hours
+            </span>{" "}
+            of effort in a month for this expense.
           </p>
         )}
       </div>

@@ -6,14 +6,17 @@ const CalculationCard = () => {
   const [monthlyWorkingHours, setMonthlyWorkingHours] = useState("");
   const [monthlyIncome, setMonthlyIncome] = useState("");
   const [itemPrice, setItemPrice] = useState("");
+  const [expenseName, setExpenseName] = useState("");
 
   const [effortResult, setEffortResult] = useState(null);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [isCalculated, setIsCalculated] = useState(false);
 
   const handleCalculateEffort = () => {
     if (!monthlyWorkingHours || !monthlyIncome || !itemPrice) {
       setShowErrorMessage(true);
       setEffortResult(null);
+      setIsCalculated(false);
       return;
     }
     const result = calculateEffort(
@@ -23,10 +26,11 @@ const CalculationCard = () => {
     );
     setShowErrorMessage(false);
     setEffortResult(result);
+    setIsCalculated(true);
   };
   return (
     <>
-      <div className="h-screen background-color flex flex-col pt-10 items-center">
+      <div className="h-screen background-color flex flex-col pt-8 items-center">
         <img src={coinPhoto} alt="home-page-pic" className="h-1/5 pr-34" />
         <div className="poppins text-2xl pt-4">
           Calculate how long it has worked for the product you will purchase.
@@ -36,7 +40,7 @@ const CalculationCard = () => {
           effort!
         </div>
 
-        <div className="flex flex-row mt-10">
+        <div className="flex flex-row mt-8">
           <div className="flex flex-col mr-8">
             <label
               className="poppins text-sm font-semibold"
@@ -71,41 +75,74 @@ const CalculationCard = () => {
             />
           </div>
         </div>
-
-        <div className="flex flex-col mt-6">
-          <label
-            className="poppins text-sm font-semibold"
-            htmlFor="expenditure"
-          >
-            How much will you spend?
-          </label>
-          <input
-            type="number"
-            id="expenditure"
-            value={itemPrice}
-            name="expenditure"
-            onChange={(e) => setItemPrice(e.target.value)}
-            className="p-1 border border-black rounded-md mt-1 calculate-input"
-          />
+        <div className="flex flex-row">
+          <div className="flex flex-col mt-6 mr-8">
+            <label
+              className="poppins text-sm font-semibold"
+              htmlFor="expenseName"
+            >
+              What will you spend?
+            </label>
+            <input
+              id="expenseName"
+              value={expenseName}
+              name="expenseName"
+              onChange={(e) => setExpenseName(e.target.value)}
+              className="p-1 border border-black rounded-md mt-1 calculate-input"
+            />
+          </div>
+          <div className="flex flex-col mt-6">
+            <label
+              className="poppins text-sm font-semibold"
+              htmlFor="expenditure"
+            >
+              How much will you spend?
+            </label>
+            <input
+              type="number"
+              id="expenditure"
+              value={itemPrice}
+              name="expenditure"
+              onChange={(e) => setItemPrice(e.target.value)}
+              className="p-1 border border-black rounded-md mt-1 calculate-input"
+            />
+          </div>
         </div>
         <button
           onClick={handleCalculateEffort}
-          className="started-button p-4 mt-6 rounded-full w-1/4"
+          className="started-button p-2 mt-6 rounded-full w-1/5"
         >
           Calculate
         </button>
+        {isCalculated && (
+          <div className="flex flex-row gap-x-6">
+            <button
+              onClick={handleCalculateEffort}
+              className="p-2 mt-6 rounded-full buy-button w-20"
+            >
+              Buy
+            </button>
+            <button
+              onClick={handleCalculateEffort}
+              className="p-2 mt-6 rounded-full giveup-button w-20"
+            >
+              Give Up
+            </button>
+          </div>
+        )}
+
         {showErrorMessage && (
           <p className="poppins pt-6 text-lg" style={{ color: "red" }}>
-            Fill in all input fields to make calculation.
+            Fill in the missing input fields to make a calculation.
           </p>
         )}
         {effortResult !== null && !showErrorMessage && (
-          <p className="poppins pt-6 text-lg">
+          <p className="poppins pt-8 text-lg">
             You have spent{" "}
             <span style={{ fontWeight: "bold", color: "green" }}>
               {effortResult.toFixed(1)} hours
             </span>{" "}
-            of effort in a month for this expense.
+            of effort in a month for this {expenseName}.
           </p>
         )}
       </div>

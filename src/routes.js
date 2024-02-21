@@ -2,6 +2,7 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Calculation from "./pages/Calculation";
+import Purchases from "./pages/Purchases";
 
 const router = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
   {
     path: "/calculation",
     element: <Calculation />,
+  },
+  {
+    path: "/purchases",
+    element: <Purchases />,
   },
 
   // TODO :: use layout if needed or remove this lines.

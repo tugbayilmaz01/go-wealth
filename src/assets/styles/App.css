@@ -33,3 +33,29 @@ body {
 .calculate-input {
   background-color: #fffae6;
 }
+
+.header-title:hover {
+  color: rgb(105, 105, 105);
+}
+
+.buy-button {
+  background-color: rgb(0, 70, 0);
+  color: #fffae6;
+}
+
+.buy-button:hover {
+  border: 1px solid rgb(0, 70, 0);
+  background-color: #fffae6;
+  color: rgb(0, 70, 0);
+}
+
+.giveup-button {
+  background-color: rgb(155, 3, 3);
+  color: #fffae6;
+}
+
+.giveup-button:hover {
+  border: 1px solid rgb(155, 3, 3);
+  background-color: #fffae6;
+  color: rgb(155, 3, 3);
+}

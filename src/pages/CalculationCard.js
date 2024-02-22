@@ -27,6 +27,27 @@ const CalculationCard = () => {
     setShowErrorMessage(false);
     setEffortResult(result);
     setIsCalculated(true);
+    console.log(result);
+  };
+
+  const handleBuy = () => {
+    if (itemPrice && effortResult !== null) {
+      const purchaseData = {
+        expenseName,
+        expenditure: parseFloat(itemPrice),
+        effortResult: parseFloat(effortResult.toFixed(2)),
+      };
+
+      const existingData =
+        JSON.parse(localStorage.getItem("purchaseData")) || [];
+      const updatedData = Array.isArray(existingData) ? existingData : [];
+
+      updatedData.push(purchaseData);
+
+      localStorage.setItem("purchaseData", JSON.stringify(updatedData));
+    } else {
+      console.error("Cannot save purchase data. Some data is missing.");
+    }
   };
   return (
     <>
@@ -117,15 +138,12 @@ const CalculationCard = () => {
         {isCalculated && (
           <div className="flex flex-row gap-x-6">
             <button
-              onClick={handleCalculateEffort}
+              onClick={handleBuy}
               className="p-2 mt-6 rounded-full buy-button w-20"
             >
               Buy
             </button>
-            <button
-              onClick={handleCalculateEffort}
-              className="p-2 mt-6 rounded-full giveup-button w-20"
-            >
+            <button className="p-2 mt-6 rounded-full giveup-button w-20">
               Give Up
             </button>
           </div>
@@ -140,7 +158,7 @@ const CalculationCard = () => {
           <p className="poppins pt-8 text-lg">
             You have spent{" "}
             <span style={{ fontWeight: "bold", color: "green" }}>
-              {effortResult.toFixed(1)} hours
+              {effortResult.toFixed(2)} hours
             </span>{" "}
             of effort in a month for this {expenseName}.
           </p>

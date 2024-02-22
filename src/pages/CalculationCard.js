@@ -27,7 +27,6 @@ const CalculationCard = () => {
     setShowErrorMessage(false);
     setEffortResult(result);
     setIsCalculated(true);
-    console.log(result);
   };
 
   const handleBuy = () => {

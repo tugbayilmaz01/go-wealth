@@ -3,7 +3,7 @@ import registerArrow from "../../assets/images/down-right.png";
 const Register = () => {
   return (
     <div className="flex items-center">
-      <button className="register-button rounded-full py-2 px-4">
+      <button className="register-button rounded-full py-2 px-4 poppins">
         Register
       </button>
       <button className="rounded-full bg-black">

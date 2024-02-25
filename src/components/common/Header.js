@@ -11,7 +11,6 @@ const Header = () => {
   };
 
   const handleOutsideClick = (event) => {
-    console.log(menuRef, event);
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setMenuOpen(false);
     }
@@ -38,8 +37,8 @@ const Header = () => {
             <Link to="/" className="font-extrabold flex poppins pl-8 pr-4">
               GoWealth.
             </Link>
-            <Link to="/">Business</Link>
-            <Link to="/purchases">Services</Link>
+            <Link to="/calculation">Calculation</Link>
+            <Link to="/purchases">Expenses</Link>
           </div>
         )}
       </div>
@@ -51,8 +50,8 @@ const Header = () => {
           GoWealth.
         </Link>
         <div className="header-title hidden md:flex gap-x-8 poppins text-sm">
-          <Link to="/">Business</Link>
-          <Link to="/purchases">Services</Link>
+          <Link to="/calculation">Calculation</Link>
+          <Link to="/purchases">Expenses</Link>
         </div>
       </div>
       {/*   <div className="hidden md:flex p-2">

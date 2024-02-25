@@ -60,7 +60,7 @@ const CalculationCard = () => {
           effort!
         </div>
 
-        <div className="flex flex-row mt-8">
+        <div className="flex flex-row max-sm:flex-col gap-y-4 mt-2">
           <div className="flex flex-col mr-8">
             <label
               className="poppins text-sm font-semibold"
@@ -78,7 +78,7 @@ const CalculationCard = () => {
             />
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col mb-4">
             <label
               className="poppins text-sm font-semibold"
               htmlFor="monthlyEarnings"
@@ -95,8 +95,8 @@ const CalculationCard = () => {
             />
           </div>
         </div>
-        <div className="flex flex-row">
-          <div className="flex flex-col mt-6 mr-8">
+        <div className="flex flex-row max-sm:flex-col gap-y-4">
+          <div className="flex flex-col mr-8">
             <label
               className="poppins text-sm font-semibold"
               htmlFor="expenseName"
@@ -111,7 +111,7 @@ const CalculationCard = () => {
               className="p-1 border border-black rounded-md mt-1 calculate-input"
             />
           </div>
-          <div className="flex flex-col mt-6">
+          <div className="flex flex-col">
             <label
               className="poppins text-sm font-semibold"
               htmlFor="expenditure"
@@ -130,7 +130,7 @@ const CalculationCard = () => {
         </div>
         <button
           onClick={handleCalculateEffort}
-          className="started-button p-2 mt-6 rounded-full w-1/5"
+          className="started-button p-2 mt-6 rounded-full md:w-1/5"
         >
           Calculate
         </button>

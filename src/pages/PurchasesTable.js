@@ -43,7 +43,7 @@ const PurchasesTable = () => {
         <div className="flex items-end gap-x-2 mb-2">
           <input
             placeholder="Search..."
-            className="px-1.5 py-1 table-search poppins md:w-full"
+            className="px-1.5 py-1 table-search poppins max-sm:w-1/2"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleKeyPress}

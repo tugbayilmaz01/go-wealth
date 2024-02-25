@@ -50,12 +50,16 @@ const CalculationCard = () => {
   };
   return (
     <>
-      <div className="h-screen background-color flex flex-col pt-8 items-center">
-        <img src={coinPhoto} alt="home-page-pic" className="h-1/5 pr-34" />
-        <div className="poppins text-2xl pt-4">
+      <div className=" background-color flex flex-col pt-8 items-center">
+        <img
+          src={coinPhoto}
+          alt="home-page-pic"
+          className="h-1/6 w-1/6 max-sm:h-1/3 max-sm:w-1/3 pr-34"
+        />
+        <div className="poppins text-2xl pt-4 px-2">
           Calculate how long it has worked for the product you will purchase.
         </div>
-        <div className="poppins text-sm mt-2">
+        <div className="poppins text-sm mt-2 px-2">
           It's time to find out if what you're going to buy is really worth your
           effort!
         </div>
@@ -130,7 +134,7 @@ const CalculationCard = () => {
         </div>
         <button
           onClick={handleCalculateEffort}
-          className="started-button p-2 mt-6 rounded-full md:w-1/5"
+          className="started-button p-2 mt-6 rounded-full md:w-1/5 mb-2"
         >
           Calculate
         </button>

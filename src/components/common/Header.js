@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Register from "./Register";
 
-const Header = () => {
+const Header = ({ currentPage }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -24,7 +24,7 @@ const Header = () => {
     };
   }, []);
   return (
-    <header className="background-color flex justify-between items-center p-2">
+    <header className="background-color flex justify-between items-center p-4">
       <div className="p-2 md:hidden " ref={menuRef}>
         <button
           onClick={handleMenuToggle}
@@ -55,7 +55,7 @@ const Header = () => {
         </div>
       </div>
       <div className="hidden md:flex p-2">
-        <Register />
+        {currentPage !== "login" && currentPage !== "register" && <Register />}
       </div>
     </header>
   );

@@ -4,9 +4,9 @@ import Header from "../../components/common/Header";
 const SignUp = () => {
   return (
     <>
-      <Header />
+      <Header currentPage="register" />
       <div className="flex flex-col items-center h-full mt-16">
-        <h2 className="poppins text-2xl mb-4 dark-blue font-medium">
+        <h2 className="poppins text-2xl mb-6 dark-blue font-medium tracking-wide">
           Sign up and manage your money with
           <span className="font-bold"> GoWealth.</span>{" "}
         </h2>

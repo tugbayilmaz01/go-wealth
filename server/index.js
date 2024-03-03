@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 5000;
-const { pool } = require("./util/database");
+const { pool } = require("./utils/database");
 (async () => {
   try {
     const connection = await pool.getConnection();

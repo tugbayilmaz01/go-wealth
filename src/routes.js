@@ -1,8 +1,10 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
-import Calculation from "./pages/Calculation";
-import Purchases from "./pages/Purchases";
+import Calculation from "./pages/LaborCalculation/Calculation";
+import Purchases from "./pages/Purchase/Purchases";
+import Login from "./pages/Authentication/Login";
+import SignUp from "./pages/Authentication/SignUp";
 
 const router = createBrowserRouter([
   {
@@ -17,22 +19,14 @@ const router = createBrowserRouter([
     path: "/purchases",
     element: <Purchases />,
   },
-
-  // TODO :: use layout if needed or remove this lines.
-  //   {
-  //     path: '/',
-  //     element: <RootLayout />,
-  //     children: [
-  //       {
-  //         path: 'tasks',
-  //         element: <Task/>
-  //       },
-  //       {
-  //         path: 'timer',
-  //         element: <Timer />
-  //       }
-  //     ]
-  //   },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <SignUp />,
+  },
 ]);
 
 export default router;

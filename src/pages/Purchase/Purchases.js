@@ -1,6 +1,6 @@
 import React from "react";
 import PurchasesTable from "./PurchasesTable";
-import Header from "../components/common/Header";
+import Header from "../../components/common/Header";
 
 const Purchases = () => {
   return (

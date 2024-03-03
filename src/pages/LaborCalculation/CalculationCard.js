@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import coinPhoto from "../../src/assets/images/coin.png";
-import { calculateEffort } from "../utils/calculateLabor";
+import coinPhoto from "../../../src/assets/images/coin.png";
+import { calculateEffort } from "../../utils/calculateLabor";
 
 const CalculationCard = () => {
   const [monthlyWorkingHours, setMonthlyWorkingHours] = useState("");

@@ -77,3 +77,19 @@ body {
 .bg-color {
   background-color: #fffae6;
 }
+
+.register-bg {
+  background-color: #181d21;
+}
+
+.input-bg {
+  background-color: #373840;
+}
+
+.dark-blue {
+  color: #181d21;
+}
+
+.text-color {
+  color: #fffae6;
+}

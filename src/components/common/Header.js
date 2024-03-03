@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-/* import Register from "./Register"; */
+import Register from "./Register";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,7 +24,7 @@ const Header = () => {
     };
   }, []);
   return (
-    <header className="background-color flex justify-between items-center p-4">
+    <header className="background-color flex justify-between items-center p-2">
       <div className="p-2 md:hidden " ref={menuRef}>
         <button
           onClick={handleMenuToggle}
@@ -33,7 +33,7 @@ const Header = () => {
           ☰
         </button>
         {menuOpen && (
-          <div className="md:hidden bg-color absolute left-0 top-0 flex flex-col border border-black rounded-sm h-full p-4 gap-y-2">
+          <div className="md:hidden bg-color absolute left-0 top-0 flex flex-col border border-black rounded-sm h-full p-2 gap-y-2">
             <Link to="/" className="font-extrabold flex poppins pl-8 pr-4">
               GoWealth.
             </Link>
@@ -54,9 +54,9 @@ const Header = () => {
           <Link to="/purchases">Expenses</Link>
         </div>
       </div>
-      {/*   <div className="hidden md:flex p-2">
+      <div className="hidden md:flex p-2">
         <Register />
-      </div> */}
+      </div>
     </header>
   );
 };

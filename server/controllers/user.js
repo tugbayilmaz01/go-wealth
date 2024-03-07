@@ -15,19 +15,19 @@ exports.create = async (req, res) => {
       });
     }
 
-    const usernameExist = await User.findByUsername(req.body.username);
+    /*     const usernameExist = await User.findByUsername(req.body.username);
     if (!usernameExist === undefined) {
       return res.status(409).send({
         message: "The username is in use.",
       });
-    }
-
+    } */
+    console.log("bura");
     const hashedPass = await bcrypt.hash(req.body.password, 12);
-
+    console.log(hashedPass);
     const user = new User({
       email: req.body.email.toLowerCase(),
       name: req.body.name,
-      username: req.body.username,
+      surname: req.body.surname,
       password: hashedPass,
     });
 

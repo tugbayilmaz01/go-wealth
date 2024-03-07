@@ -4,16 +4,16 @@ const { pool } = require("../utils/database");
 const User = function (user) {
   this.email = user.email;
   this.name = user.name;
-  this.username = user.username;
+  this.surname = user.surname;
   this.password = user.password;
 };
 
 User.create = async (newUser) => {
-  const id = crypto.lib.WordArray.random(16).toString();
-  const user = { ...newUser, id };
+  const user_id = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+  const user = { ...newUser, user_id };
   try {
-    await pool.query("INSERT INTO users SET ?", user);
-    return { id, ...newUser, password: undefined };
+    await pool.query("INSERT INTO user SET ?", user);
+    return { user_id, ...newUser, password: undefined };
   } catch (err) {
     console.log("error: ", err);
     throw err;
@@ -22,7 +22,7 @@ User.create = async (newUser) => {
 
 User.findByEmail = async (email) => {
   try {
-    const [rows] = await pool.execute("SELECT * FROM users WHERE email = ?", [
+    const [rows] = await pool.execute("SELECT * FROM user WHERE email = ?", [
       email,
     ]);
     if (rows.length) {
@@ -35,12 +35,11 @@ User.findByEmail = async (email) => {
   }
 };
 
-User.findByUsername = async (username) => {
+/* User.findByUsername = async (username) => {
   try {
-    const [rows] = await pool.execute(
-      "SELECT * FROM users WHERE username = ?",
-      [username]
-    );
+    const [rows] = await pool.execute("SELECT * FROM user WHERE username = ?", [
+      username,
+    ]);
     if (rows.length) {
       console.log("found the user: ", rows[0]);
       return rows[0];
@@ -50,20 +49,20 @@ User.findByUsername = async (username) => {
     console.log("error: ", err);
     throw err;
   }
-};
+}; */
 
-User.findById = async (id) => {
-  const idBuffer = Buffer.alloc(18, id, "utf-8");
+User.findById = async (user_id) => {
+  const idBuffer = Buffer.alloc(18, user_id, "utf-8");
 
   try {
-    const [rows] = await pool.execute("SELECT * FROM users WHERE id = ?", [
+    const [rows] = await pool.execute("SELECT * FROM user WHERE user_id = ?", [
       idBuffer,
     ]);
 
     if (rows.length) {
       const user = {
         ...rows[0],
-        id: rows[0].id.toString("utf-8"),
+        user_id: rows[0].user_id.toString("utf-8"),
       };
 
       delete user.password;
@@ -79,11 +78,11 @@ User.findById = async (id) => {
 
 User.getAll = async () => {
   try {
-    const [rows] = await pool.query("SELECT * FROM users");
+    const [rows] = await pool.query("SELECT * FROM user");
 
     if (rows.length) {
       const data = rows.map((user) => {
-        user.id = user.id.toString("utf8");
+        user.user_id = user.user_id.toString("utf8");
         user.password = undefined;
         return user;
       });
@@ -96,12 +95,12 @@ User.getAll = async () => {
   }
 };
 
-User.updateById = async (id, user) => {
-  const idBuffer = Buffer.alloc(18, id, "utf-8");
+User.updateById = async (user_id, user) => {
+  const idBuffer = Buffer.alloc(18, user_id, "utf-8");
 
   try {
     const [rows] = await pool.execute(
-      "UPDATE users SET name = ?,WHERE id = ?",
+      "UPDATE user SET name = ?,WHERE user_id = ?",
       [user.name, idBuffer]
     );
 
@@ -109,25 +108,25 @@ User.updateById = async (id, user) => {
       throw { kind: "not_found" };
     }
 
-    return { id, ...user };
+    return { user_id, ...user };
   } catch (err) {
     console.log("error: ", err);
     throw err;
   }
 };
 
-User.delete = async (id) => {
-  const idBuffer = Buffer.alloc(18, id, "utf-8");
+User.delete = async (user_id) => {
+  const idBuffer = Buffer.alloc(18, user_id, "utf-8");
 
   try {
-    const [rows] = await pool.query("DELETE FROM users WHERE id = ?", [
+    const [rows] = await pool.query("DELETE FROM user WHERE user_id = ?", [
       idBuffer,
     ]);
     if (rows.affectedRows == 0) {
       throw { kind: "not_found" };
     }
 
-    console.log("deleted user with id: ", id);
+    console.log("deleted user with id: ", user_id);
     return rows;
   } catch (err) {
     console.log("error: ", err);

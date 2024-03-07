@@ -1,7 +1,14 @@
 const express = require("express");
+const cors = require("cors");
+const { pool } = require("./utils/database");
 const app = express();
 const port = 5000;
-const { pool } = require("./utils/database");
+const routes = require("./routes");
+
+app.use(cors());
+app.use(express.json());
+app.use(routes);
+
 (async () => {
   try {
     const connection = await pool.getConnection();

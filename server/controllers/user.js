@@ -88,14 +88,14 @@ exports.login = async (req, res) => {
     const token = jwt.sign(
       {
         email: user.email,
-        id: user.id.toString(),
+        id: user.user_id.toString(),
       },
       process.env.JWT_SECRET
     );
 
     return res.status(200).send({
       token,
-      id: user.id.toString(),
+      id: user.user_id.toString(),
     });
   } catch (err) {
     if (err.kind === "not_found") {

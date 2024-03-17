@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/common/Header";
 import { userSchema } from "../../helpers/validations/UserValidation";
 
@@ -11,6 +12,7 @@ const SignUp = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
   const [error, setError] = useState(false);
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -21,9 +23,9 @@ const SignUp = () => {
     event.preventDefault();
     const isValid = await userSchema.isValid(formValues);
     if (isValid) {
-      console.log("isvalid");
       try {
         await axios.post("http://localhost:5000/users/register", formValues);
+        navigate("/login");
       } catch (err) {
         console.log(err);
         setError(true);
@@ -40,7 +42,7 @@ const SignUp = () => {
         </h2>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-y-4 items-center border-black register-bg rounded-xl p-10 relative z-10  lg:w-1/4 "
+          className="flex flex-col gap-y-4 items-center border-black register-bg rounded-xl p-10 relative z-10 lg:w-1/4 "
         >
           <input
             className="p-2 border border-black rounded-md input-bg w-full"

@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import Header from "../../components/common/Header";
 import googleIcon from "../../assets/images/google.png";
 import githubIcon from "../../assets/images/github.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+  const [error, setError] = useState(false);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await axios.post("http://localhost:5000/users/login", formValues);
+      navigate("/calculation");
+    } catch (err) {
+      console.log(err);
+      setError(true);
+    }
+  };
+
   return (
     <>
       <Header currentPage="login" />
@@ -13,16 +36,28 @@ const Login = () => {
           Welcome back to
           <span className="font-bold"> GoWealth.</span>{" "}
         </h2>
-        <div className="flex flex-col gap-y-4 items-center border-black register-bg rounded-xl p-10 relative z-10 w-1/4">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-y-4 items-center border-black register-bg rounded-xl p-10 relative z-10 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4"
+        >
           <input
             id="email"
+            type="text"
+            name="email"
+            value={formValues.email}
+            onChange={handleChange}
             placeholder="Email"
+            required
             className="p-2 border border-black rounded-md input-bg w-full"
           />
           <input
             id="password"
+            value={formValues.password}
+            name="password"
+            onChange={handleChange}
             placeholder="Password"
             type="password"
+            required
             className="p-2 border border-black rounded-md input-bg w-full"
           />
           <button className="mt-2 p-2 bg-color poppins rounded-xl font-bold w-full">
@@ -40,7 +75,7 @@ const Login = () => {
           <h2 className="text-color poppins font-bold">
             Dont Have An Accont? <Link to="/register">Sign Up</Link>{" "}
           </h2>
-        </div>
+        </form>
         <div
           className="absolute bottom-0 left-0 w-full h-full bg-black"
           style={{

@@ -8,10 +8,11 @@ const CalculationCard = () => {
   const [monthlyIncome, setMonthlyIncome] = useState("");
   const [itemPrice, setItemPrice] = useState("");
   const [expenseName, setExpenseName] = useState("");
-
   const [effortResult, setEffortResult] = useState(null);
+
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [isCalculated, setIsCalculated] = useState(false);
+  const [expenseSaved, setExpenseSaved] = useState(false);
 
   const handleCalculateEffort = () => {
     if (!monthlyWorkingHours || !monthlyIncome || !itemPrice) {
@@ -40,7 +41,8 @@ const CalculationCard = () => {
 
       try {
         await axios.post("http://localhost:5000/expenses", purchaseData);
-        console.log("Expense data sent successfully");
+        setIsCalculated(false);
+        setExpenseSaved(true);
       } catch (error) {
         console.error("Error sending expense data:", error);
       }
@@ -54,7 +56,7 @@ const CalculationCard = () => {
         <img
           src={coinPhoto}
           alt="home-page-pic"
-          className="h-1/6 w-1/6 max-sm:h-1/3 max-sm:w-1/3 pr-34"
+          className="h-1/12 w-1/12 max-sm:h-1/3 max-sm:w-1/3 pr-34"
         />
         <div className="poppins text-2xl pt-4 px-2">
           Calculate how long it has worked for the product you will purchase.
@@ -164,6 +166,11 @@ const CalculationCard = () => {
               {effortResult.toFixed(2)} hours
             </span>{" "}
             of effort in a month for this {expenseName}.
+          </p>
+        )}
+        {expenseSaved && (
+          <p className="poppins pt-4 text-lg">
+            Expenditure successfully logged in expenses table!
           </p>
         )}
       </div>

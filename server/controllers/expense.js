@@ -14,6 +14,6 @@ exports.create = async (req, res) => {
     res.send(newExpense);
   } catch (error) {
     console.error("Error creating expense:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-  res.status(500).json({ error: "Internal Server Error" });
 };

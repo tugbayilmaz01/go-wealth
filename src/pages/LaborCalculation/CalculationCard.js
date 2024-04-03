@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import coinPhoto from "../../../src/assets/images/coin.png";
 import { calculateEffort } from "../../utils/calculateLabor";
 
@@ -29,21 +30,20 @@ const CalculationCard = () => {
     setIsCalculated(true);
   };
 
-  const handleBuy = () => {
-    if (itemPrice && effortResult !== null) {
+  const handleBuy = async () => {
+    if (itemPrice && effortResult !== null && expenseName) {
       const purchaseData = {
-        expenseName,
-        expenditure: parseFloat(itemPrice),
-        effortResult: parseFloat(effortResult.toFixed(2)),
+        name: expenseName,
+        price: parseFloat(itemPrice),
+        effort: parseFloat(effortResult.toFixed(2)),
       };
 
-      const existingData =
-        JSON.parse(localStorage.getItem("purchaseData")) || [];
-      const updatedData = Array.isArray(existingData) ? existingData : [];
-
-      updatedData.push(purchaseData);
-
-      localStorage.setItem("purchaseData", JSON.stringify(updatedData));
+      try {
+        await axios.post("http://localhost:5000/expenses", purchaseData);
+        console.log("Expense data sent successfully");
+      } catch (error) {
+        console.error("Error sending expense data:", error);
+      }
     } else {
       console.error("Cannot save purchase data. Some data is missing.");
     }

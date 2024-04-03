@@ -21,9 +21,7 @@ exports.create = async (req, res) => {
         message: "The username is in use.",
       });
     } */
-    console.log("bura");
     const hashedPass = await bcrypt.hash(req.body.password, 12);
-    console.log(hashedPass);
     const user = new User({
       email: req.body.email.toLowerCase(),
       name: req.body.name,

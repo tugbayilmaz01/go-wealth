@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const PurchasesTable = () => {
   const [tableData, setTableData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const handleExpenses = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/expenses");
+      console.log(response);
+      setTableData(response.data);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
+  };
 
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("purchaseData")) || {};
-    const tableData = Array.isArray(storedData) ? storedData : [storedData];
-
-    setTableData(tableData);
+    handleExpenses();
   }, []);
 
   const handleSearch = () => {
     if (searchInput.trim() === "") {
-      const storedData = JSON.parse(localStorage.getItem("purchaseData")) || {};
-      const originalData = Array.isArray(storedData)
-        ? storedData
-        : [storedData];
-      setTableData(originalData);
+      handleExpenses();
     } else {
       const filteredData = tableData.filter(
         (item) =>
@@ -66,16 +69,17 @@ const PurchasesTable = () => {
           </tr>
         </thead>
         <tbody className="flex flex-col ">
-          {tableData.map((item, index) => (
-            <tr
-              key={index}
-              className="flex justify-between poppins mx-2 border-b border-inherit"
-            >
-              <td className="p-1">{item.expenseName}</td>
-              <td className="p-1">{item.expenditure}</td>
-              <td className="p-1">{item.effortResult}</td>
-            </tr>
-          ))}
+          {Array.isArray(tableData) &&
+            tableData.map((item, index) => (
+              <tr
+                key={index}
+                className="flex justify-between poppins mx-2 border-b border-inherit"
+              >
+                <td className="p-1">{item.name}</td>
+                <td className="p-1">{item.price}</td>
+                <td className="p-1">{item.effort}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

@@ -18,4 +18,20 @@ Expense.create = async (newExpense) => {
   }
 };
 
+Expense.getAll = async () => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM expense");
+    if (rows.length) {
+      const data = rows.map((expense) => {
+        expense.expense_id = expense.expense_id;
+        return expense;
+      });
+      return data;
+    }
+  } catch (err) {
+    console.log("error: ", err);
+  }
+  throw err;
+};
+
 module.exports = Expense;

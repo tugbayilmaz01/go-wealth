@@ -17,3 +17,12 @@ exports.create = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.getAll = async (req, res) => {
+  try {
+    const data = await Expense.getAll();
+    res.status(200).send(data);
+  } catch (error) {
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
